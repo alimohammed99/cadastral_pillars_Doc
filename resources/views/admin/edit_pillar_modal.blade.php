@@ -119,6 +119,12 @@
                             </div>
 
                             <div class="col-md-12">
+                                <label class="input-label-modern text-success">Origin Matrix</label>
+                                <input type="text" class="form-control pillar-input-modern border-success-subtle" name="origin" required
+                                    value="{{ $oldVal('origin', $pillar->origin) }}" placeholder="Origin A, Origin B...">
+                            </div>
+
+                            <div class="col-md-12">
                                 <label class="input-label-modern">Blueprint Archive</label>
                                 <input type="file" class="form-control pillar-input-modern" name="plan_document" accept="image/*"
                                     data-preview-target="#editPlanPreview-{{ $pillar->id }}"

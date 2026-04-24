@@ -401,11 +401,11 @@
                         const newRow = document.createElement('tr');
                         newRow.classList.add('no-results');
                         newRow.innerHTML = `
-    <td colspan="12">
-        <p style="color: red; font-weight: bold; text-align: left;">
-            Sorry, no record matched your input!
-        </p>
-    </td>`;
+                    <td colspan="12">
+                        <p style="color: red; font-weight: bold; text-align: left;">
+                            Sorry, no record matched your input!
+                        </p>
+                    </td>`;
                         table.querySelector('tbody').appendChild(newRow);
                     } else {
                         noResultsRow.style.display = '';

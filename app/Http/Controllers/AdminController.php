@@ -104,25 +104,34 @@ class AdminController extends Controller {
                 'pillar_number' => $pillarNumRule,
                 'eastings'      => $coordsRule,
                 'northings'     => $coordsRule,
-                'origin'        => 'nullable|string|max:255',
+                'origin'        => $pillarNumRule,
                 'height'        => 'nullable|numeric',
                 'remarks'       => 'nullable|string',
                 'plan_document' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            ], [
+                'regex' => 'The :attribute format is invalid. Please ensure it is a proper comma-separated list.',
+            ], [
+                'pillar_number' => 'Serial Indices',
+                'eastings'      => 'Eastings Matrix',
+                'northings'     => 'Northings Matrix',
+                'origin'        => 'Origin Matrix',
             ] );
 
             // Clean whitespace around commas
             $validated[ 'pillar_number' ] = preg_replace( '/\s*,\s*/', ',', trim( $validated[ 'pillar_number' ] ) );
             $validated[ 'eastings' ]  = preg_replace( '/\s*,\s*/', ',', trim( $validated[ 'eastings' ] ) );
             $validated[ 'northings' ] = preg_replace( '/\s*,\s*/', ',', trim( $validated[ 'northings' ] ) );
+            $validated[ 'origin' ]    = preg_replace( '/\s*,\s*/', ',', trim( $validated[ 'origin' ] ) );
 
             // Validate matching counts
             $pCount = count(explode(',', $validated['pillar_number']));
             $eCount = count(explode(',', $validated['eastings']));
             $nCount = count(explode(',', $validated['northings']));
+            $oCount = count(explode(',', $validated['origin']));
 
-            if ($pCount !== $eCount || $pCount !== $nCount) {
+            if ($pCount !== $eCount || $pCount !== $nCount || $pCount !== $oCount) {
                 return redirect()->back()
-                    ->withErrors(['pillar_number' => "Data mismatch: You provided $pCount Pillar Numbers, $eCount Eastings, and $nCount Northings. Counts must be equal."])
+                    ->withErrors(['pillar_number' => "Data mismatch: You provided $pCount Pillar Numbers, $eCount Eastings, $nCount Northings, and $oCount Origins. Counts must be equal."])
                     ->withInput()
                     ->with('open_modal', 'addPillarModal');
             }
@@ -158,24 +167,33 @@ class AdminController extends Controller {
                 'pillar_number' => $pillarNumRule,
                 'eastings'      => $coordsRule,
                 'northings'     => $coordsRule,
-                'origin'        => 'nullable|string|max:255',
+                'origin'        => $pillarNumRule,
                 'height'        => 'nullable|numeric',
                 'remarks'       => 'nullable|string',
                 'plan_document' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            ], [
+                'regex' => 'The :attribute format is invalid. Please ensure it is a proper comma-separated list.',
+            ], [
+                'pillar_number' => 'Serial Indices',
+                'eastings'      => 'Eastings Matrix',
+                'northings'     => 'Northings Matrix',
+                'origin'        => 'Origin Matrix',
             ] );
 
             $validated[ 'pillar_number' ] = preg_replace( '/\s*,\s*/', ',', trim( $validated[ 'pillar_number' ] ) );
             $validated[ 'eastings' ]  = preg_replace( '/\s*,\s*/', ',', trim( $validated[ 'eastings' ] ) );
             $validated[ 'northings' ] = preg_replace( '/\s*,\s*/', ',', trim( $validated[ 'northings' ] ) );
+            $validated[ 'origin' ]    = preg_replace( '/\s*,\s*/', ',', trim( $validated[ 'origin' ] ) );
 
             // Validate matching counts
             $pCount = count(explode(',', $validated['pillar_number']));
             $eCount = count(explode(',', $validated['eastings']));
             $nCount = count(explode(',', $validated['northings']));
+            $oCount = count(explode(',', $validated['origin']));
 
-            if ($pCount !== $eCount || $pCount !== $nCount) {
+            if ($pCount !== $eCount || $pCount !== $nCount || $pCount !== $oCount) {
                 return redirect()->back()
-                    ->withErrors(['pillar_number' => "Data mismatch: You provided $pCount Pillar Numbers, $eCount Eastings, and $nCount Northings. Counts must be equal."])
+                    ->withErrors(['pillar_number' => "Data mismatch: You provided $pCount Pillar Numbers, $eCount Eastings, $nCount Northings, and $oCount Origins. Counts must be equal."])
                     ->withInput()
                     ->with('open_modal', 'editPillarModal-' . $pillar);
             }

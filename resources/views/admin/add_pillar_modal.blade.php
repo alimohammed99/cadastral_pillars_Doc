@@ -144,6 +144,13 @@
                         </div>
 
                         <div class="col-md-12">
+                            <label class="input-label-modern text-success">Origin Vector</label>
+                            <input type="text" class="form-control pillar-input-modern border-success-subtle" name="origin" required
+                                value="{{ old('origin') }}"
+                                placeholder="Origin A, Origin B...">
+                        </div>
+
+                        <div class="col-md-12">
                             <label class="input-label-modern">Visual Documentation (Blueprint)</label>
                             <input type="file" class="form-control pillar-input-modern"
                                 name="plan_document" accept="image/*"

@@ -132,6 +132,10 @@
                             ->map(fn($v) => trim($v))
                             ->filter(fn($v) => $v !== '')
                             ->values();
+                        $origins = collect(explode(',', (string) $pillar->origin))
+                            ->map(fn($v) => trim($v))
+                            ->filter(fn($v) => $v !== '')
+                            ->values();
                     @endphp
 
                     <div class="row g-3">
@@ -145,7 +149,6 @@
                                         ['label' => 'Category', 'value' => $pillar->category->category_name ?? 'N/A'],
                                         ['label' => 'Pillar Name', 'value' => $pillar->name ?? 'N/A'],
                                         ['label' => 'Unit', 'value' => $pillar->unit ?? 'N/A'],
-                                        ['label' => 'Origin', 'value' => $pillar->origin ?? 'N/A'],
                                         ['label' => 'Height (m)', 'value' => $pillar->height ?? 'N/A'],
                                         ['label' => 'Survey Ref', 'value' => $pillar->survey ?? 'N/A'],
                                         ['label' => 'Location', 'value' => $pillar->location ?? 'N/A'],
@@ -264,6 +267,7 @@
                                                 <th class="py-2">PILLAR NUMBER</th>
                                                 <th class="py-2">EASTINGS</th>
                                                 <th class="py-2">NORTHINGS</th>
+                                                <th class="py-2">ORIGIN</th>
                                             </tr>
                                         </thead>
 
@@ -283,6 +287,10 @@
 
                                                     <td class="coord">
                                                         {{ $northings[$index] ?? '—' }}
+                                                    </td>
+
+                                                    <td class="coord">
+                                                        {{ $origins[$index] ?? '—' }}
                                                     </td>
 
                                                 </tr>
